@@ -8,7 +8,7 @@ One account can manage several independent budgets, such as Home and Business. E
 
 **Stack:** Next.js 16 · React 19 · TypeScript · Tailwind CSS 4 · Supabase Auth · PostgreSQL · Zod · React Hook Form · Recharts · Jest · Playwright
 
-[Application source code](https://github.com/Kamisia/mbp_1) · [Engineering evidence](ENGINEERING_NOTES.md)
+**Source code:** BudgetPro is a private project. Its source code is not shared as part of recruitment. This case study presents the product, screenshots, architecture, and engineering decisions.
 
 ![BudgetPro monthly plan on desktop, showing the monthly budget and category limits](assets/month-plan-desktop.png)
 
@@ -112,7 +112,7 @@ Category identifiers are stable stored keys; translated labels belong to present
 
 ### One read model for three views
 
-`createBudgetMonthReadModel` prepares the derived data used by the month plan, expense view, and summary. `useBudgetDerivedData` memoizes that result for React consumers.
+A shared read model prepares the derived data used by the month plan, expense view, and summary. A React hook memoizes that result for the interface.
 
 Centralizing totals and limit calculations reduces duplicated logic in components and allows those rules to be tested without rendering an entire screen. The trade-off is that aggregation currently runs on the client; larger histories could justify server-side summaries later.
 
@@ -155,7 +155,7 @@ For example, changing the Food limit should not revert a separately updated Bill
 
 The isolated browser suite intercepts Auth and API responses. It checks frontend behavior but cannot establish that live email delivery, authentication redirects, or the deployed integrations work. Those require acceptance checks in the target environment.
 
-The test strategy described here is supported by source files and CI configuration. The application suites were not rerun for this documentation update, so this case study does not claim a new passing build or a current coverage percentage.
+The project uses automated tests and CI checks at the levels described above. This case study does not report a new test run or a current coverage percentage.
 
 ## 6. Deliberate scope and trade-offs
 
@@ -175,4 +175,4 @@ The most useful next steps would be to observe representative users completing t
 
 ---
 
-Prepared on **26 October 2026** from the application repository and existing demonstration screenshots. See [engineering notes](ENGINEERING_NOTES.md) for source references and evidence boundaries.
+Prepared on **26 October 2026** using project documentation and existing demonstration screenshots. The application source code remains private.
